@@ -1,7 +1,24 @@
-<h2>You can choose from variouse places!</h2>
-<h1>{{ errorMsg }}</h1>
 
-<mat-chip-list (click)="OnClick(city)" [class.selected]="IsSelected(city)" 
-*ngFor="let city of cities">
-  <mat-chip color="primary" selected>City:{{ city }}</mat-chip>
-</mat-chip-list>
+<div fxLayout
+fxLayoutAlign="center"
+fxLayout.xs="column">
+  <h2>You can choose from variouse places!</h2>
+  <h1>{{ errorMsg }}</h1>
+</div>
+
+<div fxLayout fxLayoutAlign="center">
+  <h3>
+  Cities:
+  </h3>
+</div>
+
+<div fxLayout
+fxLayout.xs="column"
+fxLayoutAlign="center"
+fxLayoutGap="10px"
+fxLayoutGap.xs="0">
+    <mat-chip-list (click)="OnClick(city)" [class.selected]="IsSelected(city)" 
+    *ngFor="let city of cities">
+      <mat-chip color="primary" selected>{{ city }}</mat-chip>
+  </mat-chip-list>
+</div>
