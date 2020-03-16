@@ -1,0 +1,16 @@
+<h1>Travels!</h1>
+
+<input #fromWhere type="text" name="fromCity">
+<input #toWhere type="text" name="toCity">
+<button (click)='Search(fromWhere.value, toWhere.value)'>Search</button>
+
+<h2>
+  <ul>
+    <h3>{{ errorMsg }}</h3>
+    <li *ngFor="let route of routes">
+      Connection to {{route.toWhere}}: train arrive at 
+      {{route.arrivalTime}} and leaves {{route.fromWhere}} at 
+      {{route.departureTime}}.
+    </li>
+  </ul>
+</h2>

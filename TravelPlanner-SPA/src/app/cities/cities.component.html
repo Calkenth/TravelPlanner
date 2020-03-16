@@ -1,0 +1,7 @@
+<h2>You can choose from variouse places!</h2>
+<h1>{{ errorMsg }}</h1>
+
+<mat-chip-list (click)="OnClick(city)" [class.selected]="IsSelected(city)" 
+*ngFor="let city of cities">
+  <mat-chip color="primary" selected>City:{{ city }}</mat-chip>
+</mat-chip-list>
