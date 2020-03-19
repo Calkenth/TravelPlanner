@@ -5,7 +5,7 @@
     <input #fromWhere matInput type="text" name="fromCity">
   </mat-form-field>
 </div>
-  <div fxLayout fxLayoutAlign="center">
+<div fxLayout fxLayoutAlign="center">
   <mat-form-field>
     <mat-label required>To:</mat-label>
     <input #toWhere matInput type="text" name="toCity">
@@ -18,13 +18,12 @@
 <h3>{{ errorMsg }}</h3>
 
 <div fxLayout fxLayoutAlign="center">
-<mat-list>
-  <mat-list-item *ngFor="let route of routes">
-    Train to {{route.toWhere}} arrive at:
-    <mat-list-item *ngFor="let time of route.arrivalTime">
-      {{time}}
+  <mat-list *ngFor="let route of routes">
+    <mat-list-item>
+      Train to {{route.toWhere}} arrive at {{route.arrivalTime}}.
     </mat-list-item>
+    <mat-list-item>
     Train leaves at {{route.departureTime}}.
-  </mat-list-item>
-</mat-list>
+    </mat-list-item>
+  </mat-list>
 </div>
