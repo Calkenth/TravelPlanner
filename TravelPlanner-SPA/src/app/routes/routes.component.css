@@ -1,0 +1,14 @@
+.form {
+    background-color: beige;
+    border-radius: 1em;
+    width: fit-content;
+    height: fit-content;
+}
+.mat-table {
+    width: fit-content;
+    min-width: 60%;
+}
+::ng-deep .mat-form-field .mat-form-field-infix {
+    width: unset;
+}
+  

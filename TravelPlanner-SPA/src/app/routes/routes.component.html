@@ -13,17 +13,17 @@
 </div>
 
 <div fxLayout fxLayoutAlign="center">
-  <button mat-button (click)='Search(fromWhere.value, toWhere.value)'>Search</button>
+  <button mat-raised-button (click)='Search(fromWhere.value, toWhere.value)'>Search</button>
 </div>
 <h3>{{ errorMsg }}</h3>
+<div *ngIf="showRoutes" fxLayoutAlign="center">
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+    <mat-header-cell *matHeaderCellDef> {{column.header}} </mat-header-cell>
+    <mat-cell *matCellDef="let route"> {{route[column.columnDef]}} </mat-cell>
+  </ng-container>
 
-<div fxLayout fxLayoutAlign="center">
-  <mat-list *ngFor="let route of routes">
-    <mat-list-item>
-      Train to {{route.toWhere}} arrive at {{route.arrivalTime}}.
-    </mat-list-item>
-    <mat-list-item>
-    Train leaves at {{route.departureTime}}.
-    </mat-list-item>
-  </mat-list>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
 </div>

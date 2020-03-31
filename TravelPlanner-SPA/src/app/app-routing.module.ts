@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CityDetailComponent } from './city-detail/city-detail.component';
 import { RoutesComponent } from './routes/routes.component';
+import { TicketsComponent } from './tickets/tickets.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'cities', component: CitiesComponent },
   { path: 'cities/:name', component: CityDetailComponent },
   { path: 'routes', component: RoutesComponent },
+  { path: 'buyTicket', component: TicketsComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -23,5 +25,6 @@ export const RoutingComponents = [
   CitiesComponent,
   CityDetailComponent,
   RoutesComponent,
+  TicketsComponent,
   PageNotFoundComponent
 ];

@@ -28,6 +28,11 @@ namespace TravelPlanner.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDistributedMemoryCache();
+
+            var connString = Configuration.GetConnectionString("TravelPlannerContext");
+            services.AddDbContext<TravelPlannerContext>(options => options.UseSqlServer(connString));
+            services.AddControllers();
+            services.AddCors();
             services.AddSession(options =>
             {
                 options.Cookie.Name = ".TravelPlanner.Session";
@@ -35,11 +40,6 @@ namespace TravelPlanner.API
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
-
-            var connString = Configuration.GetConnectionString("TravelPlannerContext");
-            services.AddDbContext<TravelPlannerContext>(options => options.UseSqlite(connString));
-            services.AddControllers();
-            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

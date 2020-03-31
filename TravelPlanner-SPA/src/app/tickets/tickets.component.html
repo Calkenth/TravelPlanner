@@ -1,0 +1,66 @@
+<h1 align="center">Travels!</h1>
+<div fxLayout fxLayoutAlign="center">
+  <mat-form-field>
+    <mat-label required>From:</mat-label>
+    <input #fromWhere matInput type="text" name="fromCity">
+  </mat-form-field>
+</div>
+<div fxLayout fxLayoutAlign="center">
+  <mat-form-field>
+    <mat-label required>To:</mat-label>
+    <input #toWhere matInput type="text" name="toCity">
+  </mat-form-field>
+</div>
+
+<div fxLayout fxLayoutAlign="center">
+  <button mat-raised-button (click)='SearchTicket(fromWhere.value, toWhere.value)'>Find</button>
+</div>
+<h3>{{ errorMsg }}</h3>
+
+<!-- <div *ngIf="showConnections">
+<mat-list>
+  <h2 matLine>Connection from {{fromWhere.value}} to {{toWhere.value}}.Cost of this route is {{price}} EUR.</h2>
+<div *ngFor="let ticket of tickets">
+  <mat-list-item *ngFor="let ticketToBuy of ticket.tickets">
+  <p matLine>Departure time: {{ticketToBuy.departureTime}}, arrival time at {{ticketToBuy.toWhere}}: {{ticketToBuy.arrivalTime}}.
+    <button color="primary" mat-raised-button>BUY</button>
+  </p>
+</mat-list-item>
+</div>
+</mat-list>
+</div> -->
+
+<div *ngIf="showConnections" fxLayoutAlign="center">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows>
+  <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+    <th mat-header-cell *matHeaderCellDef> {{column.header}} </th>
+    <td mat-cell *matCellDef="let ticket"> {{ticket[column.columnDef]}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="expandedDetail">
+		<td mat-cell *matCellDef="let ticket" [attr.colspan]="displayedColumns.length">
+      <div class="example-element-detail" *ngIf="ticket.tickets.length > 0"
+           [@detailExpand]="ticket == expandedElement ? 'expanded' : 'collapsed'">
+				<div class="inner-table"  *ngIf="expandedElement">
+          <table class="inner-table mat-elevation-z8"  mat-table [dataSource]="ticket.tickets">
+            <ng-container *ngFor="let column of innerColumns" [matColumnDef]="column.columnDef">
+              <th mat-header-cell *matHeaderCellDef> {{column.header}} </th>
+              <td mat-cell *matCellDef="let element"> {{element[column.columnDef]}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="innerDisplayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: innerDisplayedColumns;"></tr>
+          </table>
+				</div>
+			</div>
+		</td>
+  </ng-container>
+  
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let element; columns: displayedColumns;" 
+  [class.example-element-row]="element.tickets.length"
+  [class.example-expanded-row]="expandedElement === element" 
+  (click)="expandedElement = expandedElement === element ? null : element">
+  </tr>
+	<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
+</div>

@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { IRoute } from '../route';
+import { IBigTicket } from '../bigTicket';
 
 @Injectable()
 export class CitiesService {
@@ -11,6 +12,10 @@ export class CitiesService {
   private getTicketsURL = 'http://localhost:5000/TravelPlanner/GetTickets';
 
   constructor(private http: HttpClient) { }
+  GetTicket(fromCity: string, toCity: string): Observable<IBigTicket[]>{
+    return this.http.get<IBigTicket[]>(this.getTicketsURL + '/' + fromCity + '/' + toCity)
+      .pipe(catchError(this.errorHandler));
+  }
 
   GetCities(): Observable<string[]> {
     return this.http.get<string[]>(this.getCitiesURL)
